@@ -49,6 +49,7 @@ class DoctorController extends GetxController {
     } catch (e) {
       statusReq = StatusRequest.serverFailure;
       update();
+      print(e);
       Get.snackbar("⚠️ Error", e.toString());
     }
   }

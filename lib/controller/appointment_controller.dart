@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cuer_city/core/functions/ckeck_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,15 +8,14 @@ import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 
 import '../core/class/enums.dart';
-import '../core/class/local_notification.dart';
 import '../core/constant/app_color.dart';
 import '../core/constant/image_asset.dart';
 import '../core/constant/string.dart';
+import '../core/functions/ckeck_internet.dart';
 import '../data/model/apointment_model.dart';
 import '../data/model/doctor_model.dart';
 import '../data/repositories/appointment_repo.dart';
 import '../view/widget/custom_text_form_field.dart';
-import 'notifications_controller.dart';
 import 'user_controller.dart';
 
 class ApointmentController extends GetxController {
@@ -237,7 +234,6 @@ class ApointmentController extends GetxController {
         name: _userName!,
         isCompleted: false,
         isConfirmed: false,
-
       );
       isSucss =
           await appointmentRepo.addAppointment(appointment: newAppointment);
@@ -253,25 +249,25 @@ class ApointmentController extends GetxController {
     }
 
     if (isSucss) {
-      getAllAppointment();
-      NotificationController ntfc = Get.find();
-      remindDate = ntfc.remindDate;
-      if (remindDate != null) {
-        bookDate.add(
-            Duration(hours: remindDate!.hour, minutes: remindDate!.minute));
-        LocalNotifications.showScheduleNotification(
-            id: 2,
-            context: Get.context!,
-            title: "Schedule Appointment",
-            body: "This is a Schedule Appointment Notification",
-            payload: jsonEncode(newAppointment),
-            time: bookDate);
-        // LocalNotifications.showSimpleNotification(
-        //   title: "Schedule Appointment",
-        //   body: "This is a Schedule Appointment Notification",
-        //   payload: jsonEncode(newAppointment),
-        // );
-      }
+      // getAllAppointment();
+      // NotificationController ntfc = Get.find();
+      // remindDate = ntfc.remindDate;
+      // if (remindDate != null) {
+      //   bookDate.add(
+      //       Duration(hours: remindDate!.hour, minutes: remindDate!.minute));
+      //   LocalNotifications.showScheduleNotification(
+      //       id: 2,
+      //       context: Get.context!,
+      //       title: "Schedule Appointment",
+      //       body: "This is a Schedule Appointment Notification",
+      //       payload: jsonEncode(newAppointment),
+      //       time: bookDate);
+      //   // LocalNotifications.showSimpleNotification(
+      //   //   title: "Schedule Appointment",
+      //   //   body: "This is a Schedule Appointment Notification",
+      //   //   payload: jsonEncode(newAppointment),
+      //   // );
+      // }
       isAdding = false;
       Get.close(1);
       update();
@@ -354,7 +350,7 @@ class BokingDialog extends GetView<ApointmentController> {
 
   @override
   Widget build(BuildContext context) {
-    final NotificationController notification = Get.find();
+    // final NotificationController notification = Get.find();
 
     return SizedBox(
       width: double.maxFinite,
@@ -419,27 +415,27 @@ class BokingDialog extends GetView<ApointmentController> {
                 )
               ],
             ),
-            TextButton.icon(
-              onPressed: () {
-                notification.showBokingDialog(bookingDate: date);
-              },
-              icon: Padding(
-                padding: EdgeInsets.only(left: 8.w),
-                child: SvgPicture.asset(
-                  ImageAssetSVG.notificationLogo,
-                  height: 25.h,
-                  width: 25.w,
-                  // ignore: deprecated_member_use
-                  color: AppColor.mainColor,
-                ),
-              ),
-              label: Text(Remind_Me.tr,
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.displayLarge!.color,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                  )),
-            ),
+            // TextButton.icon(
+            //   onPressed: () {
+            //     // notification.showBokingDialog(bookingDate: date);
+            //   },
+            //   icon: Padding(
+            //     padding: EdgeInsets.only(left: 8.w),
+            //     child: SvgPicture.asset(
+            //       ImageAssetSVG.notificationLogo,
+            //       height: 25.h,
+            //       width: 25.w,
+            //       // ignore: deprecated_member_use
+            //       color: AppColor.mainColor,
+            //     ),
+            //   ),
+            //   label: Text(Remind_Me.tr,
+            //       style: TextStyle(
+            //         color: Theme.of(context).textTheme.displayLarge!.color,
+            //         fontSize: 14.sp,
+            //         fontWeight: FontWeight.bold,
+            //       )),
+            // ),
             GetBuilder<ApointmentController>(
               builder: (controller) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

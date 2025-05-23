@@ -132,20 +132,19 @@ class Doctor {
     return Doctor(
       id: map['id'] != null ? map['id'] as String : map['_id'] as String,
       // id: map['id'] != null ? map['id'] as String :      null,
-      name: map['name'] != null ? map['name'] as String : null,
-      address: map['address'] != null ? map['address'] as String : null,
-      specialty: map['specialty'] != null ? map['specialty'] as String : null,
-      email: map['email'] != null ? map['email'] as String : null,
-      phoneNunber:
-          map['phoneNunber'] != null ? map['phoneNunber'] as int : null,
+      name: map['name'] != null ? map['name'] as String : '',
+      address: map['address'] != null ? map['address'] as String : '',
+      specialty: map['specialty'] != null ? map['specialty'] as String : '',
+      email: map['email'] != null ? map['email'] as String : '',
+      phoneNunber: map['phoneNunber'] != null ? map['phoneNunber'] as int : 0,
       hoursOfOperation: map['hoursOfOperation'] != null
           ? map['hoursOfOperation'] as String
-          : null,
+          : '',
       description:
-          map['description'] != null ? map['description'] as String : null,
-      img: map['img'] != null ? map['img'] as String : null,
-      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
-      updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
+          map['description'] != null ? map['description'] as String : '',
+      img: map['img'] != null ? map['img'] as String : '',
+      createdAt: map['createdAt'] != null ? map['createdAt'] as String : '',
+      updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : '',
     );
   }
 
