@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "891778128604",
+    "project_id": "medics-city",
+    "storage_bucket": "medics-city.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891778128604:android:0144752ee9c861582c7219",
+        "android_client_info": {
+          "package_name": "com.example.cuer_city"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891778128604-abn5e9qpluqn431o454ig8l4r3sl77qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKtTJFt5BT2FuU11p61mhWJYr3ZeBmUDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891778128604-abn5e9qpluqn431o454ig8l4r3sl77qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
