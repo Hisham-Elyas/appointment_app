@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../../core/functions/show_coustom_snackbar.dart';
 import '../../../core/services/services.dart';
 import '../../model/user_model.dart';

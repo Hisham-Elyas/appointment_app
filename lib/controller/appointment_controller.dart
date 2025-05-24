@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -224,10 +225,11 @@ class ApointmentController extends GetxController {
     update();
     final bool isSucss;
     final UserController userInfo = Get.find();
+    late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     final Appointment? newAppointment;
     if (isNew) {
       newAppointment = Appointment(
-        userId: userInfo.userInf.userId!,
+        userId: firebaseAuth.currentUser!.uid,
         bookDate: bookDate,
         doctor: doctorinfo,
         doctorId: doctorinfo.id!,

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../controller/appointment_controller.dart';
 import '../../../controller/chats_controller.dart';
 import '../../../controller/doctor_controller.dart';
+import '../../../controller/user_controller.dart';
 import '../../../core/constant/image_asset.dart';
 import '../../../data/repositories/appointment_repo.dart';
 import 'Schedule/schedule_screen.dart';
@@ -32,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(DrugsController());
+    Get.put(UserController());
     Get.put(DoctorController());
     Get.put(ApointmentController(
         appointmentRepo2: Get.find<AppointmentRepoImpHttp>()));

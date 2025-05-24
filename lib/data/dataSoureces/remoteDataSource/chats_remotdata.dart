@@ -1,14 +1,14 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/doctor_controller.dart';
+import '../../../controller/user_controller.dart';
 import '../../../core/functions/show_coustom_snackbar.dart';
 import '../../model/doctor_model.dart';
 import '../../model/message_history_model.dart';
 import '../../model/message_model.dart';
+import '../../model/user_model.dart';
 
 abstract class ChatsRemotData {
   Future<bool> sendMessage(
@@ -177,6 +177,8 @@ class ChatRemotDataImpFirebase implements ChatsRemotData {
           .doc();
       writeBatch.set(messagesdocReference, msg.toMap());
 //// add msg to MessageHistory in  Sender and receiver
+      UserController userController = Get.find();
+      final UserModel user = userController.userInf;
 
       /////   in Sender
       final messageHistoryReferenceSenderId = firebaseFirestore
@@ -190,6 +192,8 @@ class ChatRemotDataImpFirebase implements ChatsRemotData {
           {
             'lastMessage': msg.message,
             'receiverId': msg.receiverId,
+            'senderName': user.userName,
+            'senderId': user.userId,
             'receiverName': doctor.name,
             'timestamp': msg.timestamp,
           },
@@ -207,6 +211,8 @@ class ChatRemotDataImpFirebase implements ChatsRemotData {
             'lastMessage': msg.message,
             'receiverId': msg.senderId,
             'receiverName': doctor.name,
+            'senderId': user.userId,
+            'senderName': user.userName,
             'timestamp': msg.timestamp,
           },
           SetOptions(merge: true));
@@ -215,78 +221,6 @@ class ChatRemotDataImpFirebase implements ChatsRemotData {
       await writeBatch.commit();
 
       return true;
-    } on FirebaseException catch (e) {
-      showCustomSnackBar(
-          message: "${e.message}", title: ' Error', isError: true);
-
-      printError(info: "Failed with error '${e.code}' :  ${e.message}");
-      return false;
-    } catch (e) {
-      printError(info: e.toString());
-
-      return false;
-    }
-  }
-
-  test() async {
-    try {
-      List<String> ids = [
-        "tQsifyNIRRYksjce4KGvIHXSYA33",
-        "cyLqOUDE94SvFM8WdZEzKX27J3q1"
-      ];
-      final timestamp = Timestamp.now();
-      ids.sort();
-      String chatRoomID = ids.join("_");
-      ///// send message
-      // await firebaseFirestore
-      //     .collection('chat_rooms')
-      //     .doc(chatRoomID)
-      //     .set({'chat_rooms': 'chat_rooms'});
-
-      await firebaseFirestore
-          .collection('chat_rooms')
-          .doc(chatRoomID)
-          .collection("messages")
-          .add({
-        "message": "hi 3",
-        "Timestamp": timestamp,
-        "SenderId": "tQsifyNIRRYksjce4KGvIHXSYA33"
-      });
-      // late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-      await firebaseFirestore
-          .collection('users')
-          .doc(ids[0]) //  SenderId
-          .collection("MessageHistory")
-          .doc(ids[1]) //receiverId
-          .set({
-        'last_msg': "hi 2",
-        "list": [3]
-      }, SetOptions(merge: true));
-      await firebaseFirestore
-          .collection('users')
-          .doc(ids[1]) //receiverId
-          .collection("MessageHistory")
-          .doc(ids[0]) //  SenderId
-          .set({
-        'last_msg': "hi 2",
-        "list": [3]
-      }, SetOptions(merge: true));
-      log("=========== new msg add");
-
-      ///// get messages
-      // final msg = await firebaseFirestore
-      //     .collection('chat_rooms')
-      //     .doc(chatRoomID)
-      //     .collection("messages")
-      //     .orderBy("Timestamp", descending: false)
-      //     .get();
-      // for (var element in msg.docs) {
-      //   log("=============================");
-      //   log(element.id);
-      //   log(element.data().toString());
-      //   // log("=============================");
-      // }
-      // log("=========== get msg ");
     } on FirebaseException catch (e) {
       showCustomSnackBar(
           message: "${e.message}", title: ' Error', isError: true);

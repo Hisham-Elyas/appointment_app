@@ -22,6 +22,7 @@ class OnBordingController extends GetxController {
 
   skip() {
     Get.toNamed(AppRoutes.getStartScreen());
+    myServices.sharedPreferences.setBool('OnBording', true);
   }
 
   onPageChanged(int value) {

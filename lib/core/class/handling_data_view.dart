@@ -29,7 +29,11 @@ class HandlingDataView extends StatelessWidget {
       return Stack(
         alignment: Alignment.center,
         children: [
-          SvgPicture.asset(ImageAssetSVG.loadingAmicorImg),
+          SvgPicture.asset(
+            ImageAssetSVG.loadingAmicorImg,
+            fit: BoxFit.contain,
+            height: imgHeight.h,
+          ),
           Container(
               height: 40.r,
               width: 40.r,
