@@ -33,7 +33,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(UserController());
+    final userController = Get.put(UserController());
+    userController.getUserInfo();
+
     Get.put(DoctorController());
     Get.put(ApointmentController(
         appointmentRepo2: Get.find<AppointmentRepoImpHttp>()));

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../controller/appointment_controller.dart';
 import '../../controller/doctor_controller.dart';
 import '../../controller/forgot_password_controller.dart';
+import '../../controller/location_controller.dart';
 import '../../controller/login_screen_controller.dart';
 import '../../controller/settings_controller.dart';
 import '../../controller/sign_up_screen_controller.dart';
@@ -60,7 +61,7 @@ initialServices() async {
       fenix: true);
 
   ///  Location Controller
-  // Get.lazyPut(() => LocationController(), fenix: true);
+  Get.lazyPut(() => LocationController(), fenix: true);
 
   ///  api client
   // Get.lazyPut(() => ApiClent(), fenix: true);

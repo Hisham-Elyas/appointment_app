@@ -8,7 +8,6 @@ import '../../../../controller/appointment_controller.dart';
 import '../../../../core/class/handling_data_view.dart';
 import '../../../../core/constant/app_color.dart';
 import '../../../../core/constant/image_asset.dart';
-import '../../../../core/constant/routes.dart';
 import '../../../../core/constant/string.dart';
 import '../../../../data/model/apointment_model.dart';
 import '../../../widget/custom_app_bar.dart';
@@ -27,21 +26,21 @@ class ScheduleScreen extends GetView<ApointmentController> {
         title: Schedule.tr,
         centerTitle: false,
         goBack: goBack,
-        actions: [
-          Padding(
-            padding: EdgeInsetsDirectional.only(end: 20.w),
-            child: InkWell(
-                borderRadius: BorderRadius.circular(24.r),
-                onTap: () {
-                  Get.toNamed(AppRoutes.getNotificationsScreen());
-                },
-                child: SvgPicture.asset(
-                  ImageAssetSVG.notificationLogo,
-                  // ignore: deprecated_member_use
-                  color: AppColor.mainColor,
-                )),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: EdgeInsetsDirectional.only(end: 20.w),
+        //     child: InkWell(
+        //         borderRadius: BorderRadius.circular(24.r),
+        //         onTap: () {
+        //           Get.toNamed(AppRoutes.getNotificationsScreen());
+        //         },
+        //         child: SvgPicture.asset(
+        //           ImageAssetSVG.notificationLogo,
+        //           // ignore: deprecated_member_use
+        //           color: AppColor.mainColor,
+        //         )),
+        //   ),
+        // ],
       ),
       body: Padding(
         padding: EdgeInsets.all(20.h),

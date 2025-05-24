@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../core/class/enums.dart';
 import '../core/constant/routes.dart';
 import '../core/functions/coustom_overlay.dart';
 import '../core/functions/show_coustom_snackbar.dart';
@@ -33,8 +34,9 @@ class UserController extends GetxController {
   }
 
   final h = const Color(0x0fffffff);
-  late UserModel userInf;
+  UserModel userInf = UserModel(email: '', userName: '');
   final AuthRepoImpFirebase authRepo = Get.find();
+  StatusRequest statusRequest = StatusRequest.loading;
 
   logeOut() async {
     showOverlay(
@@ -51,6 +53,8 @@ class UserController extends GetxController {
   late final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   Future<UserModel> getUserInfo() async {
+    statusRequest = StatusRequest.loading;
+    update();
     try {
       final doc = await FirebaseFirestore.instance
           .collection('users')
@@ -61,20 +65,34 @@ class UserController extends GetxController {
         final data = doc.data();
         if (data != null && data.containsKey('user_info')) {
           final userMap = data['user_info'] as Map<String, dynamic>;
-          return UserModel.fromMap(userMap);
+          final user = UserModel.fromMap(userMap);
+          userInf = user;
+          final MyServices services = Get.find();
+          services.sharedPreferences
+              .setString('user_info', jsonEncode(user.toMap()));
+          statusRequest = StatusRequest.success;
+          update();
+          return user;
         }
       }
+      statusRequest = StatusRequest.serverFailure;
+      update();
     } on FirebaseException catch (e) {
       showCustomSnackBar(
           message: "${e.message}", title: 'Auth Error', isError: true);
 
       printError(info: "Failed with error '${e.code}' :  ${e.message}");
+      statusRequest = StatusRequest.serverFailure;
+      update();
       return UserModel(email: '', userName: '');
     } catch (e) {
       printError(info: e.toString());
-
+      statusRequest = StatusRequest.serverFailure;
+      update();
       return UserModel(email: '', userName: '');
     }
+    statusRequest = StatusRequest.serverFailure;
+    update();
     return UserModel(email: '', userName: '');
   }
 }

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../../controller/settings_controller.dart';
 import '../../../../core/constant/app_color.dart';
-import '../../../../core/constant/routes.dart';
 import '../../../../core/constant/string.dart';
 import '../../../widget/custom_app_bar.dart';
 
@@ -19,14 +18,14 @@ class SettingsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
         child: GetBuilder<SettingsController>(builder: (controller) {
           return Column(children: [
-            CustomListTileWidget(
-              icon: Icons.location_on_rounded,
-              title: Address.tr,
-              onTap: () {
-                Get.toNamed(AppRoutes.getAddressListScreen());
-              },
-            ),
-            SizedBox(height: 10.h),
+            // CustomListTileWidget(
+            //   icon: Icons.location_on_rounded,
+            //   title: Address.tr,
+            //   onTap: () {
+            //     Get.toNamed(AppRoutes.getAddressListScreen());
+            //   },
+            // ),
+            // SizedBox(height: 10.h),
             CustomListTileWidget(
               icon: Icons.language_rounded,
               title: Language.tr,

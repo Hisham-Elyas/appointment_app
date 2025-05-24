@@ -224,7 +224,6 @@ class ApointmentController extends GetxController {
     isAdding = true;
     update();
     final bool isSucss;
-    final UserController userInfo = Get.find();
     late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
     final Appointment? newAppointment;
     if (isNew) {
